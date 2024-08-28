@@ -2,11 +2,14 @@
 
 *{
   font-family: "Fira Sans Extra Condensed", sans-serif;
-  font-weight: 200;
   margin: 0;
 }
 
-.text_UltimasNoticias{
+.text_UltimasNoticias,.Text_Editors{
   font-size: 30px;
   margin: 10px;
 }
+
+
+
+

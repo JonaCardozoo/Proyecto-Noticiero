@@ -71,7 +71,7 @@ const [content, setContent] = useState("");
           <option value="MainStory">MainStory</option>
           <option value="EditorsPicks">EditorsPicks</option>
         </Select>
-      
+
         <ReactQuill  style={{width:'100%', height:'400px', }} value={content} onChange={setContent} placeholder="Escribe el contenido aquí..." />
 
         <Button style={{marginTop:'60px'}} colorScheme="blue" onClick={handleAddNews}>

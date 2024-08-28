@@ -1,4 +1,6 @@
 import { Box, Image, Text, VStack } from "@chakra-ui/react";
+import '/src/App.css'
+
 
 interface News {
   title: string;
@@ -13,6 +15,7 @@ interface EditorsPicksProps {
 export const EditorsPicks = ({ newsList }: EditorsPicksProps) => {
   return (
     <Box>
+      <h1 className="Text_Editors">Te puede interesar</h1>
       {newsList.map((news, index) => (
         <Box key={index} bg="white" boxShadow="lg" p={4} rounded="md" mb={4}>
           <Image src={news.image} alt={news.title} />

@@ -1,11 +1,12 @@
 import { useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box, Container, Grid, GridItem } from "@chakra-ui/react";
-import { Header } from "./components/Header";
-import { MainStory } from "./components/MainStory";
-import { EditorsPicks } from "./components/EditorsPicks";
-import { Admin } from "./components/Admin";
+import { Header } from "./components/Header/Header";
+import { MainStory } from "./components/MainStory/MainStory";
+import { EditorsPicks } from "./components/EditorsPicks/EditorsPicks";
+import { Admin } from "./components/Admin/Admin";
 import './App.css'
+import Login from "./components/Login/Login";
 interface News {
   title: string;
   date: string;
@@ -31,7 +32,7 @@ function App() {
   return (
     <Router>
       <Box bg="gray.100" minH="100vh">
-        <Header />
+        < Header />
         <Container maxW="container.xl" mt={6}>
           <Routes>
             <Route
@@ -48,6 +49,7 @@ function App() {
               }
             />
             <Route path="/admin" element={<Admin addNews={addNews} />} />
+            <Route path="/login" element={<Login></Login>}></Route>
           </Routes>
         </Container>
       </Box>
