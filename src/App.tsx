@@ -1,18 +1,19 @@
 import { useState} from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { Box, Container, Grid, GridItem } from "@chakra-ui/react";
 import { Header } from "./components/Header/Header";
 import { MainStory } from "./components/MainStory/MainStory";
 import { EditorsPicks } from "./components/EditorsPicks/EditorsPicks";
 import { Admin } from "./components/Admin/Admin";
 import './App.css'
-import Login from "./components/Login/Login";
 interface News {
   title: string;
   date: string;
   image: string;
   category: 'MainStory' | 'EditorsPicks';
 }
+
+
 
 function App() {
   const [newsList, setNewsList] = useState<News[]>(() => {
@@ -25,6 +26,8 @@ function App() {
     setNewsList(updatedNewsList);
     localStorage.setItem('newsList', JSON.stringify(updatedNewsList));
   };
+
+ 
 
   const mainStoryList = newsList.filter(news => news.category === 'MainStory');
   const editorsPicksList = newsList.filter(news => news.category === 'EditorsPicks');
