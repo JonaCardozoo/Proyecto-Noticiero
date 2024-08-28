@@ -1,10 +1,8 @@
 import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-// Importa los módulos necesarios de Swiper 11
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import '/src/App.css'
-// Configura Swiper para usar los módulos
 
 interface News {
   title: string;
@@ -38,7 +36,7 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
         
         navigation={true}
         loop={true}
-        modules={[Autoplay, Pagination, Navigation]} // Configura los módulos aquí
+        modules={[Autoplay, Pagination, Navigation]}
       >
         {newsList.map((news, index) => (
           <SwiperSlide key={index}>

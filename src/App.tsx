@@ -6,7 +6,6 @@ import { MainStory } from "./components/MainStory";
 import { EditorsPicks } from "./components/EditorsPicks";
 import { Admin } from "./components/Admin";
 
-// Define el tipo de las noticias
 interface News {
   title: string;
   date: string;
@@ -16,19 +15,16 @@ interface News {
 
 function App() {
   const [newsList, setNewsList] = useState<News[]>(() => {
-    // Recuperar los datos del localStorage al inicializar el estado
     const savedNews = localStorage.getItem('newsList');
     return savedNews ? JSON.parse(savedNews) : [];
   });
 
-  // Función para agregar nuevas noticias desde el Admin
   const addNews = (news: News) => {
     const updatedNewsList = [...newsList, news];
     setNewsList(updatedNewsList);
     localStorage.setItem('newsList', JSON.stringify(updatedNewsList));
   };
 
-  // Filtrar noticias por categoría
   const mainStoryList = newsList.filter(news => news.category === 'MainStory');
   const editorsPicksList = newsList.filter(news => news.category === 'EditorsPicks');
 

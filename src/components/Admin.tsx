@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Box, Input, Button, VStack, Select, useToast } from "@chakra-ui/react";
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Importa los estilos de React Quill
+import 'react-quill/dist/quill.snow.css'; 
 
 interface News {
   title: string;
   date: string;
   image: string;
   category: "MainStory" | "EditorsPicks";
-  content: string; // Este es el campo para el contenido enriquecido
+  content: string; 
 }
 
 interface AdminProps {
@@ -20,7 +20,7 @@ export const Admin = ({ addNews }: AdminProps) => {
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState<"MainStory" | "EditorsPicks" | "">("");
-  const [content, setContent] = useState(""); // Estado para el contenido
+const [content, setContent] = useState(""); 
   const toast = useToast();
 
   const handleAddNews = () => {
@@ -38,7 +38,6 @@ export const Admin = ({ addNews }: AdminProps) => {
     const newNews: News = { title, date, image, category: category as "MainStory" | "EditorsPicks", content };
     addNews(newNews);
 
-    // Limpiar los campos después de agregar la noticia
     setTitle("");
     setDate("");
     setImage("");

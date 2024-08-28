@@ -19,7 +19,7 @@ export const Header = () => {
           <Link href="#">Sports</Link>
           <Link href="#">Blog</Link>
           <button onClick={clearLocalStorage}>Borrar</button>
-          <Link as={RouterLink} to="/admin">Admin</Link> {/* Nuevo enlace al Admin */}
+          <Link as={RouterLink} to="/admin">Admin</Link>
         </Flex>
       </Flex>
     </Box>
