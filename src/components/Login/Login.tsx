@@ -1,14 +1,64 @@
-import { Button, Flex, Input } from "@chakra-ui/react";
-import '/src/App.css'
-
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react'
+import React from 'react'
+import './Login.css'
 function Login() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const initialRef = React.useRef(null)
+  const finalRef = React.useRef(null)
+
   return (
-    <Flex  flexDir='column' w='50%' m='0 auto' align='center' justifyContent='center' minHeight='85vh'>
-      <Input border='solid 1px' m='20px' placeholder="Usuario" />
-      <Input border='solid 1px' m={'20px'} placeholder="Contraseña" />
-      <Button m='20px' w='200px' style={{backgroundColor:'black',color:'white'}}>Inicar Sesion</Button>
-    </Flex>
-  );
+    <>
+      <Button _hover={{background:'transparent'}}  bg='transparent' onClick={onOpen}><span className="material-symbols-outlined login" style={{fontSize:'40px', textDecoration:'none'}}>
+            account_circle
+          </span></Button>
+      <Modal
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered={true}
+        
+      >
+        <ModalOverlay style={{backdropFilter:'blur(5px)'}} />
+        <ModalContent>
+          <ModalHeader>Unete a nosotros</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl>
+              <FormLabel>Usuario</FormLabel>
+              <Input ref={initialRef} placeholder='Usuario' />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Contraseña</FormLabel>
+              <Input placeholder='Contraseña' />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3}>
+              Save
+            </Button>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
 }
 
-export default Login;
+export default Login

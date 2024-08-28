@@ -49,7 +49,6 @@ function App() {
               }
             />
             <Route path="/admin" element={<Admin addNews={addNews} />} />
-            <Route path="/login" element={<Login></Login>}></Route>
           </Routes>
         </Container>
       </Box>
