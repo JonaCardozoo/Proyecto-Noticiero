@@ -5,7 +5,7 @@ import { Header } from "./components/Header";
 import { MainStory } from "./components/MainStory";
 import { EditorsPicks } from "./components/EditorsPicks";
 import { Admin } from "./components/Admin";
-
+import './App.css'
 interface News {
   title: string;
   date: string;
