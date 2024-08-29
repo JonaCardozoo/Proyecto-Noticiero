@@ -13,8 +13,6 @@ interface News {
   category: 'MainStory' | 'EditorsPicks';
 }
 
-
-
 function App() {
   const [newsList, setNewsList] = useState<News[]>(() => {
     const savedNews = localStorage.getItem('newsList');

@@ -41,9 +41,9 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
         {newsList.map((news, index) => (
           <SwiperSlide key={index}>
             <Box position="relative">
-              <Image src={news.image} alt={news.title} />
+              <Image  src={news.image} alt={news.title} width="800px" height="650px" objectFit="cover"/>
               <VStack
-              
+
                 position="absolute"
                 bottom={0}
                 left={0}
@@ -52,8 +52,11 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
                 color="white"
                 p={4}
                 align="start"
+                width="800px"
+                overflow="hidden"
+                boxSizing="border-box"
               >
-                <Text fontSize="2xl" fontWeight="bold">
+                <Text  fontSize="2xl" fontWeight="bold">
                   {news.title}
                 </Text>
               </VStack>

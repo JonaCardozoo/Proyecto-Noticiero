@@ -17,7 +17,7 @@ export const Header = () => {
           <Login></Login>
           <Link as={RouterLink} to="/">Inicio</Link>
           <button onClick={clearLocalStorage}>Borrar</button>
-          <Link style={{ display: 'none' }} as={RouterLink} to="/admin">Admin</Link>
+          <Link as={RouterLink} to="/admin">Admin</Link>
         </Flex>
       </Flex>
     </Box>
