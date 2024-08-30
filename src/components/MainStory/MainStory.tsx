@@ -17,23 +17,18 @@ interface MainStoryProps {
 
 export const MainStory = ({ newsList }: MainStoryProps) => {
   return (
-    
-    <Box>
+    <Box className="main-history" width={{ base: "100%", md: "100%" }}>
       <h1 className="text_UltimasNoticias">Ultimas Noticias</h1>  
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
-        
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
         }}
-        
         pagination={{
           clickable: true,
-          
         }}
-        
         navigation={true}
         loop={true}
         modules={[Autoplay, Pagination, Navigation]}
@@ -41,9 +36,14 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
         {newsList.map((news, index) => (
           <SwiperSlide key={index}>
             <Box position="relative">
-              <Image  src={news.image} alt={news.title} width="800px" height="650px" objectFit="cover"/>
+              <Image 
+                src={news.image}
+                alt={news.title}
+                width={{ base: "100%", md: "900px" }}
+                height={{ base: "400px", md: "700px" }}
+                objectFit="cover"
+              />
               <VStack
-
                 position="absolute"
                 bottom={0}
                 left={0}
@@ -52,11 +52,11 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
                 color="white"
                 p={4}
                 align="start"
-                width="800px"
+                width="850px"
                 overflow="hidden"
                 boxSizing="border-box"
               >
-                <Text  fontSize="2xl" fontWeight="bold">
+                <Text fontSize={{ base: "14px", md: "20px"}} fontWeight="bold">
                   {news.title}
                 </Text>
               </VStack>

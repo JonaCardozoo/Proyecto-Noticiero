@@ -1,5 +1,5 @@
-import { useState} from "react";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box, Container, Grid, GridItem } from "@chakra-ui/react";
 import { Header } from "./components/Header/Header";
 import { MainStory } from "./components/MainStory/MainStory";
@@ -25,25 +25,33 @@ function App() {
     localStorage.setItem('newsList', JSON.stringify(updatedNewsList));
   };
 
- 
+
 
   const mainStoryList = newsList.filter(news => news.category === 'MainStory');
   const editorsPicksList = newsList.filter(news => news.category === 'EditorsPicks');
 
   return (
     <Router>
-      <Box bg="gray.100" minH="100vh">
+      <Box bg="gray.200" minH="100vh">
         < Header />
         <Container maxW="container.xl" mt={6}>
           <Routes>
             <Route
               path="/"
               element={
-                <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+                <Grid
+                  templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+                  gap={6}
+                >
                   <GridItem colSpan={2}>
                     <MainStory newsList={mainStoryList} />
                   </GridItem>
-                  <GridItem>
+                  <GridItem
+                    colSpan={{ base: 1, md: 1 }}
+                    mt={{ base: 4, md: 0 }}
+                    display={{ base: "flex", md: "block" }}
+                    justifyContent={{ base: "center", md: "unset" }}
+                  >
                     <EditorsPicks newsList={editorsPicksList} />
                   </GridItem>
                 </Grid>

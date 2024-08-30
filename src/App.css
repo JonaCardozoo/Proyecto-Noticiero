@@ -10,6 +10,32 @@
   margin: 10px;
 }
 
+/* /src/App.css */
+.news-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (max-width: 600px) {
+  .news-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-history,
+  .editors-picks {
+    width: 100%;
+  }
+
+  .editors-picks {
+    margin-top: 20px;
+  }
+}
+
+
+
+
 
 
 
