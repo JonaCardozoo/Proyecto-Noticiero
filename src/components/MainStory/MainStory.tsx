@@ -1,5 +1,6 @@
 import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from "react-router-dom";
 import 'swiper/css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import '/src/App.css'
@@ -9,6 +10,7 @@ interface News {
   date: string;
   image: string;
   category: 'MainStory' | 'EditorsPicks';
+  content:string;
 }
 
 interface MainStoryProps {
@@ -16,6 +18,11 @@ interface MainStoryProps {
 }
 
 export const MainStory = ({ newsList }: MainStoryProps) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (news:News) =>{
+    navigate('/news-detail',{state:news});
+  }
   return (
     <Box className="main-history" width={{ base: "100%", md: "100%" }}>
       <h1 className="text_UltimasNoticias">Ultimas Noticias</h1>  
@@ -35,8 +42,9 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
       >
         {newsList.map((news, index) => (
           <SwiperSlide key={index}>
-            <Box position="relative">
+            <Box position="relative" onClick={() => handleNavigate(news)} cursor={"pointer"}>
               <Image 
+                cursor={"pointer"}
                 src={news.image}
                 alt={news.title}
                 width={{ base: "100%", md: "900px" }}

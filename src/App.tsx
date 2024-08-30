@@ -6,11 +6,13 @@ import { MainStory } from "./components/MainStory/MainStory";
 import { EditorsPicks } from "./components/EditorsPicks/EditorsPicks";
 import { Admin } from "./components/Admin/Admin";
 import './App.css'
+import { NewsDetail } from "./NewsDetail/NewsDetail";
 interface News {
   title: string;
   date: string;
   image: string;
   category: 'MainStory' | 'EditorsPicks';
+  content:string;
 }
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
               }
             />
             <Route path="/admin" element={<Admin addNews={addNews} />} />
+            <Route path="/news-detail" element={<NewsDetail></NewsDetail>}></Route>
           </Routes>
         </Container>
       </Box>
