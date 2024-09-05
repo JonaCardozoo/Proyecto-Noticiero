@@ -17,11 +17,13 @@ import {
 import './Login.css';
 import Register from '../Register/Register';
 
+/*
 interface LoginProps {
   onLoginSuccess: () => void;
 }
+  */
 
-function Login({ onLoginSuccess }: LoginProps) {
+function Login() {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
   const initialRef = React.useRef<HTMLInputElement>(null);
@@ -46,6 +48,7 @@ function Login({ onLoginSuccess }: LoginProps) {
         throw new Error('Error en la solicitud');
       }
 
+      /*
       onLoginSuccess(); 
       toast({
         title: "Inicio de sesión con éxito",
@@ -53,6 +56,7 @@ function Login({ onLoginSuccess }: LoginProps) {
         duration: 4000,
         isClosable: true
       });
+      */
     } catch (error) {
       toast({
         title: "Error al iniciar sesión",
