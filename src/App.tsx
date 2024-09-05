@@ -5,10 +5,11 @@ import { Header } from "./components/Header/Header";
 import { MainStory } from "./components/MainStory/MainStory";
 import { EditorsPicks } from "./components/EditorsPicks/EditorsPicks";
 import { Admin } from "./components/Admin/Admin";
-import Footer from "./Footer/Footer"
-import './App.css'
+import Footer from "./Footer/Footer";
+import './App.css';
 import { NewsDetail } from "./NewsDetail/NewsDetail";
 import MarqueeComponent from "./Marquee/Marquee";
+import { EditNews } from "./EditNews/EditNews";
 
 interface News {
   title: string;
@@ -18,6 +19,8 @@ interface News {
   content: string;
   category_news: string;
 }
+
+
 
 function App() {
   const [newsList, setNewsList] = useState<News[]>(() => {
@@ -36,8 +39,8 @@ function App() {
 
   return (
     <Router>
-      <Box bg="#CBD5E0" minH="100vh">
-        < Header />
+      <Box bg="#f3f3f3" minH="100vh">
+        <Header />
         <Container maxW="container.xl" mt={6}>
           <Routes>
             <Route
@@ -68,7 +71,6 @@ function App() {
                           alt="Código Patrón"
                           boxSize={{ base: '100%', md: '150%', lg: '150%' }}
                           objectFit="cover"
-
                         />
                       </Link>
                     </div>
@@ -77,15 +79,19 @@ function App() {
               }
             />
             <Route path="/admin" element={<Admin addNews={addNews} />} />
-            <Route path="/news-detail" element={<NewsDetail></NewsDetail>}></Route>
-          </Routes>
+            <Route path="/news-detail" element={<NewsDetail />} />
 
+
+            <Route
+              path="/edit-news"
+              element={<EditNews newsList={newsList} setNewsList={setNewsList} />}
+            />
+          </Routes>
         </Container>
-        <MarqueeComponent></MarqueeComponent>
-        <Footer></Footer>
+        <MarqueeComponent />
+        <Footer />
       </Box>
     </Router>
-
   );
 }
 

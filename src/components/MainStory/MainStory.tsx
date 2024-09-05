@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Image, Text, VStack, Badge, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Image, Text, VStack, Badge, IconButton, useBreakpointValue, Button } from '@chakra-ui/react';
 import Slider from 'react-slick';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +27,10 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
   const top = useBreakpointValue({ base: '90%', md: '50%' });
   const side = useBreakpointValue({ base: '30%', md: '10px' });
 
+  const handleEdit = (news: News) => {
+    navigate('/edit-news', { state: news });
+  };
+
   const settings = {
     dots: true,
     arrows: false,
@@ -45,7 +49,7 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
 
   return (
     <Box className="main-history" width={{ base: '100%', md: '100%' }} position="relative" height={'600px'} overflow={'hidden'}>
-      {/* Left Icon */}
+      
       <IconButton
         aria-label="left-arrow"
         colorScheme="messenger"
@@ -60,7 +64,7 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
       >
         <BiLeftArrowAlt />
       </IconButton>
-      {/* Right Icon */}
+      
       <IconButton
         aria-label="right-arrow"
         colorScheme="messenger"
@@ -75,7 +79,7 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
       >
         <BiRightArrowAlt />
       </IconButton>
-      {/* Slider */}
+      
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {newsList.map((news, index) => (
           <Box key={index} position="relative" onClick={() => handleNavigate(news)} cursor={"pointer"}>
@@ -102,6 +106,7 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
               <Text fontSize={{ base: '14px', md: '20px' }} fontWeight="bold">
                 {news.title}
               </Text>
+              <Button onClick={() => handleEdit(news)} colorScheme='blue' size="sm">Editar</Button>
               <Badge margin={3} fontSize={20} colorScheme='red'>{news.category_news}</Badge>
             </VStack>
           </Box>

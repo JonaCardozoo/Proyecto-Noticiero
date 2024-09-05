@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Box, Input, Button, VStack, Select, useToast } from "@chakra-ui/react";
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; 
-import '/src/App.css'
+import 'react-quill/dist/quill.snow.css';
+import './Admin.css'
 interface News {
   title: string;
   date: string;
   image: string;
   category: "MainStory" | "EditorsPicks";
-  content: string; 
-  category_news:string;
+  content: string;
+  category_news: string;
 }
 
 interface AdminProps {
@@ -18,14 +18,13 @@ interface AdminProps {
 
 const modules = {
   toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-    [{size: []}],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, 
-     {'indent': '-1'}, {'indent': '+1'}],
-    ['link', 'image','video'], 
-    ['clean']                                        
-  ],
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+    [{ size: ['small', false, 'large', 'huge'] }], // Opciones de tamaño de letra
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    ['link', 'image'],
+    ['clean']                                         // remove formatting button
+  ]
 };
 
 export const Admin = ({ addNews }: AdminProps) => {
@@ -33,8 +32,8 @@ export const Admin = ({ addNews }: AdminProps) => {
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState<"MainStory" | "EditorsPicks" | "">("");
-  const [content, setContent] = useState(""); 
-  const [category_news, setCategoryNews] = useState(""); 
+  const [content, setContent] = useState("");
+  const [category_news, setCategoryNews] = useState("");
   const toast = useToast();
 
   const handleAddNews = () => {
@@ -49,7 +48,9 @@ export const Admin = ({ addNews }: AdminProps) => {
       return;
     }
 
-    const newNews: News = { title, date, image, category: category as "MainStory" | "EditorsPicks", content,category_news};
+
+
+    const newNews: News = { title, date, image, category: category as "MainStory" | "EditorsPicks", content, category_news };
     addNews(newNews);
 
     toast({
@@ -104,13 +105,16 @@ export const Admin = ({ addNews }: AdminProps) => {
           <option value="EditorsPicks">EditorsPicks</option>
         </Select>
 
-        <ReactQuill 
-          style={{ width: '100%', height: '400px' }} 
-          value={content} 
-          onChange={setContent} 
+        <ReactQuill className="ql_editor"
+          style={{ width: '100%', height: '400px' }}
+          value={content}
+          onChange={setContent}
           placeholder="Escribe el contenido aquí..."
-          modules={modules} 
+          modules={modules}
+          
+
         />
+
 
         <Button margin={'33px'} colorScheme="blue" onClick={handleAddNews}>
           Agregar Noticia
