@@ -10,7 +10,7 @@
   margin: 10px;
 }
 
-/* /src/App.css */
+
 .news-section {
   display: flex;
   justify-content: space-between;
@@ -31,6 +31,35 @@
   .editors-picks {
     margin-top: 20px;
   }
+
+  
+}
+
+.youtube_link{
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  overflow: hidden;
+  transition:  0.3s;
+}
+
+.youtube_link h1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin: 20px;
+}
+
+
+
+.youtube_link img{
+  transition:  0.3s;
+}
+
+.youtube_link img:hover{
+  transition:  0.3s;
+  transform: scale(1.1);
 }
 
 

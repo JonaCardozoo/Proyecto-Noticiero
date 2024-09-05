@@ -9,22 +9,36 @@ interface News {
   image: string;
   category: "MainStory" | "EditorsPicks";
   content: string; 
+  category_news:string;
 }
 
 interface AdminProps {
   addNews: (news: News) => void;
 }
 
+const modules = {
+  toolbar: [
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, 
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image','video'], 
+    ['clean']                                        
+  ],
+};
+
 export const Admin = ({ addNews }: AdminProps) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState<"MainStory" | "EditorsPicks" | "">("");
-const [content, setContent] = useState(""); 
+  const [content, setContent] = useState(""); 
+  const [category_news, setCategoryNews] = useState(""); 
   const toast = useToast();
 
   const handleAddNews = () => {
-    if (!title || !date || !image || !category || !content) {
+    if (!title || !date || !image || !category || !content || !category_news) {
       toast({
         title: "Campos incompletos.",
         description: "Por favor, completa todos los campos antes de agregar la noticia.",
@@ -35,14 +49,22 @@ const [content, setContent] = useState("");
       return;
     }
 
-    const newNews: News = { title, date, image, category: category as "MainStory" | "EditorsPicks", content };
+    const newNews: News = { title, date, image, category: category as "MainStory" | "EditorsPicks", content,category_news};
     addNews(newNews);
+
+    toast({
+      title: "Noticia agregada con exito.",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
 
     setTitle("");
     setDate("");
     setImage("");
     setCategory("");
     setContent("");
+    setCategoryNews("");
   };
 
   return (
@@ -66,6 +88,12 @@ const [content, setContent] = useState("");
           onChange={(e) => setImage(e.target.value)}
           border={"1px solid"}
         />
+        <Input
+          placeholder="Categoria de la noticia"
+          value={category_news}
+          onChange={(e) => setCategoryNews(e.target.value)}
+          border={"1px solid"}
+        />
         <Select
           placeholder="Selecciona la categoría"
           value={category}
@@ -76,9 +104,15 @@ const [content, setContent] = useState("");
           <option value="EditorsPicks">EditorsPicks</option>
         </Select>
 
-        <ReactQuill  style={{width:'100%', height:'400px'}} value={content} onChange={setContent} placeholder="Escribe el contenido aquí..."  />
+        <ReactQuill 
+          style={{ width: '100%', height: '400px' }} 
+          value={content} 
+          onChange={setContent} 
+          placeholder="Escribe el contenido aquí..."
+          modules={modules} 
+        />
 
-        <Button style={{marginTop:'60px'}} colorScheme="blue" onClick={handleAddNews}>
+        <Button margin={'33px'} colorScheme="blue" onClick={handleAddNews}>
           Agregar Noticia
         </Button>
       </VStack>

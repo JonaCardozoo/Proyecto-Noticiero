@@ -15,14 +15,11 @@ import {
 } from '@chakra-ui/react';
 import './Register.css';
 
-
 interface RegisterProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenLogin: () => void;
 }
-
-
 
 function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
   const initialRef = React.useRef<HTMLInputElement>(null);
@@ -48,7 +45,6 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
         throw new Error('Error en la solicitud');
       }
 
-      
       toast({
         title:"Usuario registrado con exito",
         status:"success",
