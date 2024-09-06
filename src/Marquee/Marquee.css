@@ -1,16 +1,30 @@
-
 .container_sponsonrs a{
     transition: 0.3s;
 }
 
 .container_sponsonrs{
-
     display: flex;
-    margin: 10px;
+    justify-content: center;
+    align-items: center;
     transition: 0.3s;
+    margin: 15px auto;
+    gap: 200px;
 }
+
+.container_sponsonrs a{
+    border-radius: 50%;
+    padding: auto;
+}
+
+.container_sponsonrs img{
+    height: 100px;
+    
+}
+
+
 
 .container_sponsonrs a:hover{
     transition: 0.3s;
     background-color: rgb(255, 255, 255);
+    
 }

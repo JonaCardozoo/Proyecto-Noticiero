@@ -81,7 +81,6 @@ function App() {
             <Route path="/admin" element={<Admin addNews={addNews} />} />
             <Route path="/news-detail" element={<NewsDetail />} />
 
-
             <Route
               path="/edit-news"
               element={<EditNews newsList={newsList} setNewsList={setNewsList} />}

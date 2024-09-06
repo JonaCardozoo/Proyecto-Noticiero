@@ -1,0 +1,127 @@
+.container-Link{
+display: flex;
+flex-direction: column;
+}
+
+
+.Twitter-icon{
+    transition:0.3s;
+}
+
+.Twitter-icon a{
+    transition:0.3s;
+    border-radius: 50%;
+}
+
+
+.Twitter-icon a:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: aqua;
+}
+
+.Twitter-icon:hover{
+    transition: 0.1s;
+    color: aliceblue;
+}
+
+.Facebook-icon{
+    transition:0.3s;
+}
+
+.Facebook-icon a{
+    transition:0.3s;
+    border-radius: 50%;
+}
+
+
+.Facebook-icon a:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: rgb(0, 76, 255);
+}
+
+.Facebook-icon:hover{
+    transition: 0.3s;
+    color: aliceblue;
+}
+
+.Instagram-icon{
+    transition:0.3s;
+}
+
+.Instagram-icon a{
+    transition:0.3s;
+    border-radius: 50%;
+}
+
+
+.Instagram-icon a:hover{
+    transform: scale(1.1);
+    
+    background: #833ab4;
+  background: linear-gradient(
+    
+    #833ab4,#fd1d1d,#fcb045
+    
+  );
+  transition: 0.3s;
+}
+
+.Instagram-icon:hover{
+    
+    transition: 0.1s;
+    color: aliceblue;
+}
+
+.Youtube-icon{
+    transition:0.3s;
+}
+
+.Youtube-icon a{
+    transition:0.3s;
+    border-radius: 50%;
+}
+
+
+.Youtube-icon a:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: rgb(250, 0, 0);
+}
+
+.Youtube-icon:hover{
+    transition: 0.1s;
+    color: aliceblue;
+}
+
+.Link_footer:hover{
+    text-decoration: none;
+}
+
+
+.Link_publicidad{
+    display: flex;
+    justify-content: center;
+    transition: 0.3s;
+    background-color: #000000;
+    margin: 0;
+    top: 0;
+    width: 40%;
+    border-radius: 50px;
+    color: white;
+}
+
+
+  
+
+.Link_publicidad span{
+    
+    color: white;
+}
+
+.Link_publicidad:hover{
+    transition: 0.3s;
+    transform: scale(1.1);
+}
+ 

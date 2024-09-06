@@ -38,11 +38,10 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
     infinite: true,
     autoplay: true,
     speed: 600,
-    autoplaySpeed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
+  
   const handleNavigate = (news: News) => {
     navigate('/news-detail', { state: news });
   };
