@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './MainStory.css';
 
+
 interface News {
   title: string;
   date: string;
@@ -41,11 +42,11 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  
+
   const handleNavigate = (news: News) => {
     navigate('/news-detail', { state: news });
   };
-
+  
   return (
     <Box className="main-history" width={{ base: '100%', md: '100%' }} position="relative" height={'600px'} overflow={'hidden'}>
       
@@ -111,6 +112,8 @@ export const MainStory = ({ newsList }: MainStoryProps) => {
           </Box>
         ))}
       </Slider>
+      
     </Box>
+    
   );
 };

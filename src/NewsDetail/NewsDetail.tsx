@@ -1,6 +1,9 @@
 import { Box, Image, Text, VStack,Badge } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import './NewsDetail.css'
+
+
+
 export const NewsDetail = () => {
 
     const location = useLocation();
@@ -21,6 +24,7 @@ export const NewsDetail = () => {
                     <div style={{width:'100%', fontSize:'20px'}} dangerouslySetInnerHTML={{__html:content}}></div>
                 </Box>
             </VStack>
+            
         </Box>
     );
 
