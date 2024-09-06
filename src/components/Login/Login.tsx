@@ -7,64 +7,77 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   Button,
   FormControl,
   FormLabel,
   Input,
   useToast,
+  useDisclosure
 } from '@chakra-ui/react';
 import './Login.css';
 import Register from '../Register/Register';
 
-/*
 interface LoginProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (role: string) => void;
 }
-  */
 
-function Login() {
+function Login({ onLoginSuccess }: LoginProps) {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
   const initialRef = React.useRef<HTMLInputElement>(null);
   const finalRef = React.useRef<HTMLInputElement>(null);
 
-  const [email, setUsuario] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const toast = useToast();
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:8000/login', {
+      const response = await fetch('https://api-node-jwit.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usuario: email, password }),
+        body: JSON.stringify({ username: email, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Error en la solicitud');
+        throw new Error(data.msg || 'Error en la solicitud');
       }
 
-      /*
-      onLoginSuccess(); 
+      
+      localStorage.setItem('token', data.token);
+
+      
+      onLoginSuccess(data.role);
+
       toast({
         title: "Inicio de sesión con éxito",
         status: "success",
         duration: 4000,
         isClosable: true
       });
-      */
-    } catch (error) {
-      toast({
-        title: "Error al iniciar sesión",
-        description: "Revise los datos o regístrese",
-        status: "error",
-        duration: 4000,
-        isClosable: true
-      });
+        
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al iniciar sesión",
+          description: error.message || "Revise los datos o regístrese",
+          status: "error",
+          duration: 4000,
+          isClosable: true
+        });
+      } else {
+        toast({
+          title: "Error desconocido",
+          status: "error",
+          duration: 4000,
+          isClosable: true
+        });
+      }
     }
   };
 
@@ -80,12 +93,12 @@ function Login() {
       <Modal initialFocusRef={initialRef} finalFocusRef={finalRef} isOpen={isLoginOpen} onClose={onLoginClose} isCentered={true}>
         <ModalOverlay style={{ backdropFilter: 'blur(5px)' }} />
         <ModalContent>
-          <ModalHeader>Únete a nosotros</ModalHeader>
+          <ModalHeader>Inicia sesión</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb='6'>
             <FormControl>
               <FormLabel>Usuario</FormLabel>
-              <Input ref={initialRef} placeholder='Usuario' value={email} onChange={(e) => setUsuario(e.target.value)} required />
+              <Input ref={initialRef} placeholder='Usuario' value={email} onChange={(e) => setEmail(e.target.value)} required />
             </FormControl>
 
             <FormControl mt='4'>

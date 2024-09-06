@@ -24,45 +24,56 @@ interface RegisterProps {
 function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
   const initialRef = React.useRef<HTMLInputElement>(null);
   const finalRef = React.useRef<HTMLInputElement>(null);
-
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const toast = useToast();
 
   const handleRegister = async () => {
     try {
-      const response = await fetch('http://localhost:8000/register', {
+      const response = await fetch('https://api-node-jwit.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usuario: username, password, rol: 'user' }),
+        body: JSON.stringify({ username,password }), 
       });
+      
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error('Error en la solicitud');
+        throw new Error(data.msg || 'Error en la solicitud');
       }
 
+      // Muestra un mensaje según el rol recibido
       toast({
-        title:"Usuario registrado con exito",
-        status:"success",
-        duration:4000,
-        isClosable:true
+        title: `Usuario registrado como ${data.role}`,
+        status: "success",
+        duration: 4000,
+        isClosable: true
+      });
 
-      });
-      onClose();  
-    } catch (error) {
-      toast({
-        title:"Ese usuario ya esta registrado",
-        description:"Ingrese con su cuenta",
-        status:"error",
-        duration:4000,
-        isClosable:true
-      });
+      onClose();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al registrar",
+          description: error.message || "Inténtelo de nuevo",
+          status: "error",
+          duration: 4000,
+          isClosable: true
+        });
+      } else {
+        toast({
+          title: "Error desconocido",
+          status: "error",
+          duration: 4000,
+          isClosable: true
+        });
+      }
     }
   };
+  
 
   return (
     <>
@@ -85,14 +96,6 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
                 placeholder='Usuario'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Correo</FormLabel>
-              <Input
-                placeholder='Correo'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
             <FormControl mt={4}>
