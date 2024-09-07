@@ -26,21 +26,19 @@ function Login({ onLoginSuccess }: LoginProps) {
   const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
   const initialRef = React.useRef<HTMLInputElement>(null);
   const finalRef = React.useRef<HTMLInputElement>(null);
-
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   const toast = useToast();
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://api-node-jwit.onrender.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: email, password }),
-      });
+        const response = await fetch('https://api-node-jwit.onrender.com/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
 
       const data = await response.json();
 
@@ -60,7 +58,7 @@ function Login({ onLoginSuccess }: LoginProps) {
         duration: 4000,
         isClosable: true
       });
-        
+
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast({
@@ -98,7 +96,7 @@ function Login({ onLoginSuccess }: LoginProps) {
           <ModalBody pb='6'>
             <FormControl>
               <FormLabel>Usuario</FormLabel>
-              <Input ref={initialRef} placeholder='Usuario' value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <Input ref={initialRef} placeholder='Usuario' value={username} onChange={(e) => setUsername(e.target.value)} required />
             </FormControl>
 
             <FormControl mt='4'>

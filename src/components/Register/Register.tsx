@@ -36,7 +36,7 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username,password }), 
+        body: JSON.stringify({ username, password }), 
       });
       
       const data = await response.json();
@@ -45,7 +45,6 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
         throw new Error(data.msg || 'Error en la solicitud');
       }
 
-      // Muestra un mensaje según el rol recibido
       toast({
         title: `Usuario registrado como ${data.role}`,
         status: "success",
