@@ -19,9 +19,10 @@ import Register from '../Register/Register';
 
 interface LoginProps {
   onLoginSuccess: (role: string) => void;
+  onClose: () => void;
 }
 
-function Login({ onLoginSuccess }: LoginProps) {
+function Login({ onLoginSuccess,onClose }: LoginProps) {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
   const initialRef = React.useRef<HTMLInputElement>(null);
@@ -51,6 +52,7 @@ function Login({ onLoginSuccess }: LoginProps) {
 
       
       onLoginSuccess(data.role);
+      
 
       toast({
         title: "Inicio de sesión con éxito",
@@ -58,7 +60,7 @@ function Login({ onLoginSuccess }: LoginProps) {
         duration: 4000,
         isClosable: true
       });
-
+      onClose()
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast({
