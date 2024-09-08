@@ -14,6 +14,25 @@ interface News {
   category_news: string;
 }
 
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', // Formatos de texto
+  'blockquote', 'code-block', // Citas y bloques de código
+  'list', 'bullet', // Listas
+  'link', 'image', // Links e imágenes
+];
+
+const modules = {
+  toolbar: [
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], // Encabezados y fuentes
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }], // Listas
+    ['bold', 'italic', 'underline', 'strike'], // Formatos de texto
+    ['link', 'image'], // Links e imágenes
+    ['blockquote', 'code-block'], // Citas y bloques de código
+    [{ 'align': [] }], // Alineación de texto
+  ],
+};
+
 interface EditNewsProps {
   newsList: News[];
   setNewsList: React.Dispatch<React.SetStateAction<News[]>>;
@@ -106,7 +125,7 @@ export const EditNews = ({ newsList, setNewsList }: EditNewsProps) => {
 
       <FormControl mt={4}>
         <FormLabel>Contenido</FormLabel>
-        <ReactQuill value={formData.content} onChange={handleContentChange} />
+        <ReactQuill value={formData.content} onChange={handleContentChange} modules={modules} formats={formats} />
       </FormControl>
 
       <Button onClick={handleSave} colorScheme="green" mt={4}>

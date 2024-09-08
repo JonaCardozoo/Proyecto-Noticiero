@@ -14,6 +14,25 @@ interface News {
   category_news: string;
 }
 
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', // Formatos de texto
+  'blockquote', 'code-block', // Citas y bloques de código
+  'list', 'bullet', // Listas
+  'link', 'image', // Links e imágenes
+];
+
+const modules = {
+  toolbar: [
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], // Encabezados y fuentes
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }], // Listas
+    ['bold', 'italic', 'underline', 'strike'], // Formatos de texto
+    ['link', 'image'], // Links e imágenes
+    ['blockquote', 'code-block'], // Citas y bloques de código
+    [{ 'align': [] }], // Alineación de texto
+  ],
+};
+
 interface AdminProps {
   addNews: (news: News) => Promise<void>;
 }
@@ -120,6 +139,8 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
           value={content}
           onChange={setContent}
           placeholder="Escribe el contenido aquí..."
+          modules={modules}
+          formats={formats}
         />
 
         <Button margin={'33px'} colorScheme="blue" onClick={handleAddNews}>
