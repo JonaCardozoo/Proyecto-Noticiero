@@ -13,15 +13,9 @@ export const Header = () => {
     }
   };
 
-  const clearLocalStorage = () => {
-    localStorage.clear();
-    alert('LocalStorage borrado!');
-  };
-
-  
+ 
   const handleCloseLogin = () => {
-    console.log("Login modal closed");
-    
+    //
   };
 
   return (
@@ -31,7 +25,6 @@ export const Header = () => {
         <Spacer />
         <Flex gap='50px' align='center'>
           <Login onLoginSuccess={handleLoginSuccess} onClose={handleCloseLogin} />
-          <button onClick={clearLocalStorage}>Borrar</button>
           <Link
             as={RouterLink}
             to="/admin"
