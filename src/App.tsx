@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Box, Container, Grid, GridItem, Image, Link } from "@chakra-ui/react";
+import { Box, Container, Grid, GridItem, Image, Link, Spinner,Text } from "@chakra-ui/react";
 import { Header } from "./components/Header/Header";
 import { MainStory } from "./components/MainStory/MainStory";
 import { EditorsPicks } from "./components/EditorsPicks/EditorsPicks";
@@ -23,10 +23,11 @@ interface News {
 
 function App() {
   const [newsList, setNewsList] = useState<News[]>([]);
-
+  const [loading,setLoading] = useState(true);
   
   const fetchNewsList = async () => {
     try {
+      setLoading(true);
       const response = await fetch('https://api-node-jwit.onrender.com/news');
       if (!response.ok) {
         throw new Error('Error al obtener las noticias');
@@ -36,6 +37,9 @@ function App() {
       setNewsList(data);
     } catch (error: unknown) {
       console.error('Error fetching news:', error);
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -79,6 +83,12 @@ function App() {
             <Route
               path="/"
               element={
+                loading ? ( // Mostrar mensaje de cargando si está en estado de carga
+                  <Box textAlign="center">
+                  <Spinner size="xl" color="blue.500" />
+                  <Text mt={4} fontSize="xl">Cargando noticias...</Text>
+                </Box>
+                ) :
                 <Grid
                   templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
                   gap={6}
