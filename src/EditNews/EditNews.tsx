@@ -5,6 +5,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 interface News {
+  username:string;
   title: string;
   date: string;
   image: string;
@@ -24,6 +25,7 @@ export const EditNews = ({ newsList, setNewsList }: EditNewsProps) => {
   const news = location.state as News;
 
   const [formData, setFormData] = useState<News>({
+    username:news.username,
     title: news.title,
     date: news.date,
     image: news.image,

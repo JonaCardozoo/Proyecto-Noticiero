@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Box, Input, Button, VStack, Select, useToast } from "@chakra-ui/react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './Admin.css'
+import './Admin.css';
+
 interface News {
+  username: string;
   title: string;
   date: string;
   image: string;
@@ -13,21 +15,11 @@ interface News {
 }
 
 interface AdminProps {
-  addNews: (news: News) => void;
+  addNews: (news: News) => Promise<void>;
 }
 
-const modules = {
-  toolbar: [
-    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-    [{ size: ['small', false, 'large', 'huge'] }], // Opciones de tamaño de letra
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    ['link', 'image'],
-    ['clean']                                         // remove formatting button
-  ]
-};
-
-export const Admin = ({ addNews }: AdminProps) => {
+export const Admin: React.FC<AdminProps> = ({ addNews }) => {
+  const [username] = useState("Jona");
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
@@ -36,7 +28,7 @@ export const Admin = ({ addNews }: AdminProps) => {
   const [category_news, setCategoryNews] = useState("");
   const toast = useToast();
 
-  const handleAddNews = () => {
+  const handleAddNews = async () => {
     if (!title || !date || !image || !category || !content || !category_news) {
       toast({
         title: "Campos incompletos.",
@@ -47,25 +39,42 @@ export const Admin = ({ addNews }: AdminProps) => {
       });
       return;
     }
-
-
-
-    const newNews: News = { title, date, image, category: category as "MainStory" | "EditorsPicks", content, category_news };
-    addNews(newNews);
-
-    toast({
-      title: "Noticia agregada con exito.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-
-    setTitle("");
-    setDate("");
-    setImage("");
-    setCategory("");
-    setContent("");
-    setCategoryNews("");
+  
+    const newNews: News = {
+      username,
+      title,
+      date,
+      image,
+      category: category as "MainStory" | "EditorsPicks",
+      content,
+      category_news
+    };
+  
+    try {
+      await addNews(newNews);
+      toast({
+        title: "Noticia agregada con éxito.",
+        description: "La noticia ha sido agregada.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+  
+      setTitle("");
+      setDate("");
+      setImage("");
+      setCategory("");
+      setContent("");
+      setCategoryNews("");
+    } catch (error) {
+      toast({
+        title: "Error.",
+        description: "Ocurrió un error al agregar la noticia.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -90,7 +99,7 @@ export const Admin = ({ addNews }: AdminProps) => {
           border={"1px solid"}
         />
         <Input
-          placeholder="Categoria de la noticia"
+          placeholder="Categoría de la noticia"
           value={category_news}
           onChange={(e) => setCategoryNews(e.target.value)}
           border={"1px solid"}
@@ -105,16 +114,13 @@ export const Admin = ({ addNews }: AdminProps) => {
           <option value="EditorsPicks">EditorsPicks</option>
         </Select>
 
-        <ReactQuill className="ql_editor"
+        <ReactQuill
+          className="ql_editor"
           style={{ width: '100%', height: '400px' }}
           value={content}
           onChange={setContent}
           placeholder="Escribe el contenido aquí..."
-          modules={modules}
-          
-
         />
-
 
         <Button margin={'33px'} colorScheme="blue" onClick={handleAddNews}>
           Agregar Noticia

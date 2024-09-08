@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box, Container, Grid, GridItem, Image, Link } from "@chakra-ui/react";
 import { Header } from "./components/Header/Header";
@@ -12,28 +12,61 @@ import MarqueeComponent from "./Marquee/Marquee";
 import { EditNews } from "./EditNews/EditNews";
 
 interface News {
+  username: string;
   title: string;
   date: string;
   image: string;
-  category: 'MainStory' | 'EditorsPicks';
+  category: "MainStory" | "EditorsPicks";
   content: string;
   category_news: string;
 }
 
-
-
 function App() {
-  const [newsList, setNewsList] = useState<News[]>(() => {
-    const savedNews = localStorage.getItem('newsList');
-    return savedNews ? JSON.parse(savedNews) : [];
-  });
+  const [newsList, setNewsList] = useState<News[]>([]);
 
-  const addNews = (news: News) => {
-    const updatedNewsList = [...newsList, news];
-    setNewsList(updatedNewsList);
-    localStorage.setItem('newsList', JSON.stringify(updatedNewsList));
+  
+  const fetchNewsList = async () => {
+    try {
+      const response = await fetch('https://api-node-jwit.onrender.com/news');
+      if (!response.ok) {
+        throw new Error('Error al obtener las noticias');
+      }
+      const data = await response.json();
+      
+      setNewsList(data);
+    } catch (error: unknown) {
+      console.error('Error fetching news:', error);
+    }
   };
 
+  
+  const addNews = async (news: News) => {
+    try {
+      const response = await fetch('https://api-node-jwit.onrender.com/news', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(news),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al agregar la noticia');
+      }
+
+      
+      await fetchNewsList();
+    } catch (error) {
+      console.error('Error adding news:', error);
+    }
+  };
+
+  //Mostrar todas las noticias
+  useEffect(() => {
+    fetchNewsList();
+  }, []);
+
+  
   const mainStoryList = newsList.filter(news => news.category === 'MainStory');
   const editorsPicksList = newsList.filter(news => news.category === 'EditorsPicks');
 
