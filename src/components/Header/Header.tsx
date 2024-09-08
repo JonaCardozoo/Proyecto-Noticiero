@@ -18,21 +18,27 @@ export const Header = () => {
     alert('LocalStorage borrado!');
   };
 
+  
+  const handleCloseLogin = () => {
+    console.log("Login modal closed");
+    
+  };
+
   return (
     <Box bg="#822727" color="black" px={4} py={2}>
       <Flex alignItems="center">
         <a href="/"><img style={{ width: '200px' }} src="logoheader.png" alt="" /></a>
         <Spacer />
         <Flex gap='50px' align='center'>
-          <Login onLoginSuccess={handleLoginSuccess} />
+          <Login onLoginSuccess={handleLoginSuccess} onClose={handleCloseLogin} />
           <button onClick={clearLocalStorage}>Borrar</button>
           <Link
             as={RouterLink}
             to="/admin"
             style={{
               display: isAdminLinkEnabled ? 'inline' : 'none',
-              color: 'blue',
-              textDecoration: 'underline'
+              color: 'black',
+              textDecoration: 'none'
             }}
           >
             Admin

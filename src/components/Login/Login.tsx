@@ -33,7 +33,7 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
 
   const handleLogin = async () => {
     try {
-        const response = await fetch('http://localhost:3001/login', {
+        const response = await fetch('https://api-node-jwit.onrender.com/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
 
       
       onLoginSuccess(data.role);
-      
+      onClose();
 
       toast({
         title: "Inicio de sesión con éxito",
@@ -60,7 +60,7 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
         duration: 4000,
         isClosable: true
       });
-      onClose()
+      
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast({
