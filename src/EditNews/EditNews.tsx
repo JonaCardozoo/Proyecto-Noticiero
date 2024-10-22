@@ -16,20 +16,20 @@ interface News {
 
 const formats = [
   'header',
-  'bold', 'italic', 'underline', 'strike', // Formatos de texto
-  'blockquote', 'code-block', // Citas y bloques de código
-  'list', 'bullet', // Listas
-  'link', 'image', // Links e imágenes
+  'bold', 'italic', 'underline', 'strike', 
+  'blockquote', 'code-block', 
+  'list', 'bullet', 
+  'link', 'image', 
 ];
 
 const modules = {
   toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], // Encabezados y fuentes
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }], // Listas
-    ['bold', 'italic', 'underline', 'strike'], // Formatos de texto
-    ['link', 'image'], // Links e imágenes
-    ['blockquote', 'code-block'], // Citas y bloques de código
-    [{ 'align': [] }], // Alineación de texto
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], 
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
+    ['bold', 'italic', 'underline', 'strike'], 
+    ['link', 'image'], 
+    ['blockquote', 'code-block'], 
+    [{ 'align': [] }], 
   ],
 };
 
@@ -77,7 +77,7 @@ export const EditNews = ({ newsList, setNewsList }: EditNewsProps) => {
     );
     setNewsList(updatedNewsList);
     localStorage.setItem('newsList', JSON.stringify(updatedNewsList));
-    navigate('/'); // Redirige a la página de noticias o donde prefieras
+    navigate('/');
   };
 
   return (

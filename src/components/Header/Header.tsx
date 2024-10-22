@@ -17,7 +17,7 @@ export const Header = () => {
   const handleCloseLogin = () => {
     //
   };
-
+  
   return (
     <Box bg="#822727" color="black" px={4} py={2}>
       <Flex alignItems="center">
@@ -35,6 +35,12 @@ export const Header = () => {
             }}
           >
             Admin
+          </Link>
+          <Link
+            as={RouterLink}
+            to="/proximos-partidos"
+          >
+            Proximos partidos
           </Link>
         </Flex>
       </Flex>

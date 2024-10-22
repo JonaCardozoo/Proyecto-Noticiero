@@ -33,7 +33,7 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
 
   const handleLogin = async () => {
     try {
-        const response = await fetch('https://api-node-jwit.onrender.com/login', {
+        const response = await fetch('http://localhost:3001/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

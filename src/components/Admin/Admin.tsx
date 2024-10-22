@@ -16,20 +16,20 @@ interface News {
 
 const formats = [
   'header',
-  'bold', 'italic', 'underline', 'strike', // Formatos de texto
-  'blockquote', 'code-block', // Citas y bloques de código
-  'list', 'bullet', // Listas
-  'link', 'image', // Links e imágenes
+  'bold', 'italic', 'underline', 'strike', 
+  'blockquote', 'code-block', 
+  'list', 'bullet', 
+  'link', 'image', 
 ];
 
 const modules = {
   toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], // Encabezados y fuentes
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }], // Listas
-    ['bold', 'italic', 'underline', 'strike'], // Formatos de texto
-    ['link', 'image'], // Links e imágenes
-    ['blockquote', 'code-block'], // Citas y bloques de código
-    [{ 'align': [] }], // Alineación de texto
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], 
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
+    ['bold', 'italic', 'underline', 'strike'], 
+    ['link', 'image'], 
+    ['blockquote', 'code-block'], 
+    [{ 'align': [] }], 
   ],
 };
 
@@ -47,6 +47,7 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
   const [category_news, setCategoryNews] = useState("");
   const toast = useToast();
 
+  
   const handleAddNews = async () => {
     if (!title || !date || !image || !category || !content || !category_news) {
       toast({

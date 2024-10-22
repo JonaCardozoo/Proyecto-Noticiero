@@ -10,6 +10,7 @@ import './App.css';
 import { NewsDetail } from "./NewsDetail/NewsDetail";
 import MarqueeComponent from "./Marquee/Marquee";
 import { EditNews } from "./EditNews/EditNews";
+import ProximosPartidos from './Partidos/ProximosPartidos';
 
 interface News {
   username: string;
@@ -19,6 +20,7 @@ interface News {
   category: "MainStory" | "EditorsPicks";
   content: string;
   category_news: string;
+  
 }
 
 function App() {
@@ -28,7 +30,7 @@ function App() {
   const fetchNewsList = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://api-node-jwit.onrender.com/news');
+      const response = await fetch('http://localhost:3001/news');
       if (!response.ok) {
         throw new Error('Error al obtener las noticias');
       }
@@ -46,7 +48,7 @@ function App() {
   
   const addNews = async (news: News) => {
     try {
-      const response = await fetch('https://api-node-jwit.onrender.com/news', {
+      const response = await fetch('http://localhost:3001/news', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,13 +85,14 @@ function App() {
             <Route
               path="/"
               element={
-                loading ? ( // Mostrar mensaje de cargando si está en estado de carga
+                loading ? ( 
                   <Box textAlign="center">
                   <Spinner size="xl" color="blue.500" />
                   <Text mt={4} fontSize="xl">Cargando noticias...</Text>
                 </Box>
                 ) :
                 <Grid
+                
                   templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
                   gap={6}
                 >
@@ -118,11 +121,13 @@ function App() {
                       </Link>
                     </div>
                   </GridItem>
+                  
                 </Grid>
               }
             />
             <Route path="/admin" element={<Admin addNews={addNews} />} />
             <Route path="/news-detail" element={<NewsDetail />} />
+            <Route path="/proximos-partidos" element={<ProximosPartidos />} />
             <Route
               path="/edit-news"
               element={<EditNews newsList={newsList} setNewsList={setNewsList} />}

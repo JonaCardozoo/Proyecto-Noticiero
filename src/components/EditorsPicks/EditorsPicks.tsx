@@ -1,4 +1,4 @@
-import { Box, Image, Text, VStack,Badge, Button } from "@chakra-ui/react";
+import { Box, Image, Text, VStack,Badge} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import './EditorsPicks.css'
 
@@ -20,9 +20,7 @@ export const EditorsPicks = ({ newsList }: EditorsPicksProps) => {
     navigate('/news-detail',{state:news});
   }
 
-  const handleEdit = (news:News) =>{
-    navigate('/edit-news',{state:news});
-  }
+  
   return (
     <Box className="editors-picks" width="100%">
       <h1 className="Text_Editors">Te puede interesar</h1>
@@ -44,7 +42,7 @@ export const EditorsPicks = ({ newsList }: EditorsPicksProps) => {
           <VStack align="start" mt={4}>
             <Text fontSize="2xl" fontWeight="bold">{news.title}</Text>
             <Text fontSize="sm" color="gray.500">{news.date}</Text>
-            <Button onClick={() => handleEdit(news)} colorScheme="blue" size="sm">Editar</Button>
+           
           </VStack>
         </Box>
       ))}
