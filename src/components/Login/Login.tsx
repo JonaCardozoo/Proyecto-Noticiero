@@ -22,7 +22,7 @@ interface LoginProps {
   onClose: () => void;
 }
 
-function Login({ onLoginSuccess,onClose }: LoginProps) {
+function Login({ onLoginSuccess, onClose }: LoginProps) {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
   const initialRef = React.useRef<HTMLInputElement>(null);
@@ -33,13 +33,13 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
 
   const handleLogin = async () => {
     try {
-        const response = await fetch('http://localhost:3001/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
+      const response = await fetch('https://api-node-jwit.onrender.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
       const data = await response.json();
 
@@ -47,10 +47,10 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
         throw new Error(data.msg || 'Error en la solicitud');
       }
 
-      
+
       localStorage.setItem('token', data.token);
 
-      
+
       onLoginSuccess(data.role);
       onClose();
 
@@ -60,7 +60,7 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
         duration: 4000,
         isClosable: true
       });
-      
+
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast({
@@ -105,7 +105,7 @@ function Login({ onLoginSuccess,onClose }: LoginProps) {
               <FormLabel>Contraseña</FormLabel>
               <Input type='password' placeholder='Contraseña' value={password} onChange={(e) => setPassword(e.target.value)} required />
             </FormControl>
-          
+
             <Button variant="link" onClick={() => { onLoginClose(); onRegisterOpen(); }}>
               ¿Todavía no tienes cuenta? Regístrate
             </Button>

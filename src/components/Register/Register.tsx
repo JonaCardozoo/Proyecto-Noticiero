@@ -31,14 +31,14 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch('http://localhost:3001/register', {
+      const response = await fetch('https://api-node-jwit.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }), 
+        body: JSON.stringify({ username, password }),
       });
-      
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -72,7 +72,7 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
       }
     }
   };
-  
+
 
   return (
     <>
