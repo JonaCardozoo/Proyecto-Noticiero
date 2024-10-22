@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Grid, GridItem, Heading, Image, Link, Stack, Text } from "@chakra-ui/react";
+import { ButtonGroup, Card, CardBody, CardFooter, CardHeader, Grid, GridItem, Heading, Image, Stack, Text } from "@chakra-ui/react";
 
 function ProximosPartidos() {
   return (
