@@ -33,7 +33,7 @@ function Login({ onLoginSuccess, onClose }: LoginProps) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('https://apinode-production-5616.up.railway.app/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ function Login({ onLoginSuccess, onClose }: LoginProps) {
 
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('role', data.role);
 
 
       onLoginSuccess(data.role);
@@ -106,9 +107,6 @@ function Login({ onLoginSuccess, onClose }: LoginProps) {
               <Input type='password' placeholder='Contraseña' value={password} onChange={(e) => setPassword(e.target.value)} required />
             </FormControl>
 
-            <Button variant="link" onClick={() => { onLoginClose(); onRegisterOpen(); }}>
-              ¿Todavía no tienes cuenta? Regístrate
-            </Button>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme='blue' mr='3' onClick={handleLogin}>
