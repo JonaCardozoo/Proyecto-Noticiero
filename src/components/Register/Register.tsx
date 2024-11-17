@@ -31,7 +31,7 @@ function Register({ isOpen, onClose, onOpenLogin }: RegisterProps) {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch('https://apinode-production-5616.up.railway.app/api/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

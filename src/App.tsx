@@ -30,7 +30,7 @@ function App() {
   const fetchNewsList = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://apinode-production-5616.up.railway.app/api/news');
+      const response = await fetch('/api/news');
       if (!response.ok) {
         throw new Error('Error al obtener las noticias');
       }
@@ -48,7 +48,7 @@ function App() {
 
   const addNews = async (news: News) => {
     try {
-      const response = await fetch('https://apinode-production-5616.up.railway.app/api/news', {
+      const response = await fetch('/api/news', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
