@@ -33,7 +33,7 @@ function Login({ onLoginSuccess, onClose }: LoginProps) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://apinode-production-5616.up.railway.app/login', {
+      const response = await fetch('https://apinode-production-5616.up.railway.app/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
