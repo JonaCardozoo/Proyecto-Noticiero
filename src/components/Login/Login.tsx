@@ -15,7 +15,6 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import './Login.css';
-import Register from '../Register/Register';
 
 interface LoginProps {
   onLoginSuccess: (role: string) => void;
