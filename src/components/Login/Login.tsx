@@ -24,7 +24,6 @@ interface LoginProps {
 
 function Login({ onLoginSuccess, onClose }: LoginProps) {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
-  const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure();
   const initialRef = React.useRef<HTMLInputElement>(null);
   const finalRef = React.useRef<HTMLInputElement>(null);
   const [username, setUsername] = useState('');
