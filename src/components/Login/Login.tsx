@@ -115,9 +115,6 @@ function Login({ onLoginSuccess, onClose }: LoginProps) {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-      {/* Modal de Registro */}
-      <Register isOpen={isRegisterOpen} onClose={onRegisterClose} onOpenLogin={onLoginOpen} />
     </>
   );
 }
