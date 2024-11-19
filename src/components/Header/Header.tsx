@@ -20,13 +20,14 @@ export const Header = () => {
     if (role === 'admin') {
       setIsAdminLinkEnabled(true);
     }
+    navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     setIsAdminLinkEnabled(false);
-    navigate('/'); // Redirigir al inicio
+    navigate('/');
   };
 
   return (
