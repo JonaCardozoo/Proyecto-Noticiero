@@ -13,6 +13,7 @@ import { EditNews } from "./EditNews/EditNews";
 import ProximosPartidos from './Partidos/ProximosPartidos';
 
 interface News {
+  idNoticia: string;
   username: string;
   title: string;
   date: string;
@@ -31,6 +32,7 @@ function App() {
     try {
       setLoading(true);
       const response = await fetch('https://apinode-production-5616.up.railway.app/news');
+
       if (!response.ok) {
         throw new Error('Error al obtener las noticias');
       }
@@ -67,7 +69,7 @@ function App() {
     }
   };
 
-  //Mostrar todas las noticias
+
   useEffect(() => {
     fetchNewsList();
   }, []);
@@ -126,7 +128,7 @@ function App() {
               }
             />
             <Route path="/admin" element={<Admin addNews={addNews} />} />
-            <Route path="/news-detail" element={<NewsDetail />} />
+            <Route path="/news/:idNoticia" element={<NewsDetail />} />
             <Route path="/proximos-partidos" element={<ProximosPartidos />} />
             <Route
               path="/edit-news"

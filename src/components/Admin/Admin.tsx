@@ -1,44 +1,40 @@
 import { useState } from "react";
 import { Box, Input, Button, VStack, Select, useToast } from "@chakra-ui/react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import './Admin.css';
-
-interface News {
-  username: string;
-  title: string;
-  date: string;
-  image: string;
-  category: "MainStory" | "EditorsPicks";
-  content: string;
-  category_news: string;
-}
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "./Admin.css";
+import { AdminNews } from "../../tipo";
 
 const formats = [
-  'header',
-  'bold', 'italic', 'underline', 'strike', 
-  'blockquote', 'code-block', 
-  'list', 'bullet', 
-  'link', 'image', 
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "code-block",
+  "list",
+  "bullet",
+  "link",
+  "image",
 ];
 
 const modules = {
   toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], 
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
-    ['bold', 'italic', 'underline', 'strike'], 
-    ['link', 'image'], 
-    ['blockquote', 'code-block'], 
-    [{ 'align': [] }], 
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["bold", "italic", "underline", "strike"],
+    ["link", "image"],
+    ["blockquote", "code-block"],
+    [{ align: [] }],
   ],
 };
 
 interface AdminProps {
-  addNews: (news: News) => Promise<void>;
+  addNews: (news: AdminNews) => Promise<void>;
 }
 
 export const Admin: React.FC<AdminProps> = ({ addNews }) => {
-  const [username] = useState("Jona");
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [image, setImage] = useState("");
@@ -47,7 +43,6 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
   const [category_news, setCategoryNews] = useState("");
   const toast = useToast();
 
-  
   const handleAddNews = async () => {
     if (!title || !date || !image || !category || !content || !category_news) {
       toast({
@@ -59,19 +54,20 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
       });
       return;
     }
-  
-    const newNews: News = {
-      username,
+
+    const newNews: AdminNews = {
+      username: "Jona", // Asegúrate de darle un valor por defecto a username
       title,
       date,
       image,
       category: category as "MainStory" | "EditorsPicks",
       content,
-      category_news
+      category_news,
+      idNoticia: ''
     };
-  
+
     try {
-      await addNews(newNews);
+      await addNews(newNews);  // Aquí estás pasando un AdminNews con un username obligatorio
       toast({
         title: "Noticia agregada con éxito.",
         description: "La noticia ha sido agregada.",
@@ -79,7 +75,8 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
         duration: 3000,
         isClosable: true,
       });
-  
+
+      // Limpiar los campos después de agregar la noticia
       setTitle("");
       setDate("");
       setImage("");
@@ -89,7 +86,7 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
     } catch (error) {
       toast({
         title: "Error.",
-        description: "Ocurrió un error al agregar la noticia.",
+        description: "Ocurrió un error al agregar la noticia. Intenta nuevamente.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -107,6 +104,7 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
           border={"1px solid"}
         />
         <Input
+          type="date"
           placeholder="Fecha"
           value={date}
           onChange={(e) => setDate(e.target.value)}
@@ -136,7 +134,7 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
 
         <ReactQuill
           className="ql_editor"
-          style={{ width: '100%', height: '400px' }}
+          style={{ width: "100%", height: "400px" }}
           value={content}
           onChange={setContent}
           placeholder="Escribe el contenido aquí..."
@@ -144,7 +142,7 @@ export const Admin: React.FC<AdminProps> = ({ addNews }) => {
           formats={formats}
         />
 
-        <Button margin={'33px'} colorScheme="blue" onClick={handleAddNews}>
+        <Button margin={"33px"} colorScheme="blue" onClick={handleAddNews}>
           Agregar Noticia
         </Button>
       </VStack>

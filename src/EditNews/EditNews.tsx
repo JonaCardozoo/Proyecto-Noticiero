@@ -5,7 +5,8 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
 interface News {
-  username:string;
+  idNoticia: string;
+  username: string;
   title: string;
   date: string;
   image: string;
@@ -16,20 +17,20 @@ interface News {
 
 const formats = [
   'header',
-  'bold', 'italic', 'underline', 'strike', 
-  'blockquote', 'code-block', 
-  'list', 'bullet', 
-  'link', 'image', 
+  'bold', 'italic', 'underline', 'strike',
+  'blockquote', 'code-block',
+  'list', 'bullet',
+  'link', 'image',
 ];
 
 const modules = {
   toolbar: [
-    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], 
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
-    ['bold', 'italic', 'underline', 'strike'], 
-    ['link', 'image'], 
-    ['blockquote', 'code-block'], 
-    [{ 'align': [] }], 
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    ['bold', 'italic', 'underline', 'strike'],
+    ['link', 'image'],
+    ['blockquote', 'code-block'],
+    [{ 'align': [] }],
   ],
 };
 
@@ -44,7 +45,8 @@ export const EditNews = ({ newsList, setNewsList }: EditNewsProps) => {
   const news = location.state as News;
 
   const [formData, setFormData] = useState<News>({
-    username:news.username,
+    idNoticia: news.idNoticia,
+    username: news.username,
     title: news.title,
     date: news.date,
     image: news.image,
